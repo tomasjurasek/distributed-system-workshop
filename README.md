@@ -19,7 +19,7 @@ Naučíme si jak pomocí známých návrhových vzorů - DDD, CQRS, Event Sourci
 #### Základní pojmy 
 * Synchronní versus Asynchronní komunikace
 * Reaktivní přístup
-* Eventuální konzistence, Neměnné objekty,...
+* Eventuální konzistence, Neměnné objekty, Konkurentní konflikty...
 
 #### Návrhové vzory
 * Domain-Driven Design
