@@ -49,7 +49,9 @@ Naučíme si jak pomocí známých návrhových vzorů - DDD, CQRS, Event Sourci
 
 ### Základní informace kurzu
 Délka kurzu: 2 dny  
-Termín: 24.-25.února  
+Termín: 24.-25.února
+Místo: Online
 Cena: 3999 kč  
 Počet: maximálně 5 účastníků  
-Registrace na mailu [jurasek.tomas@hotmail.cz](mailto:jurasek.tomas@hotmail.cz)
+
+Registrace na e-mailu [jurasek.tomas@hotmail.cz](mailto:jurasek.tomas@hotmail.cz)
