@@ -30,6 +30,7 @@ Naučíme se jak pomocí návrhových vzorů - DDD, CQRS, Event Sourcing navrhno
 * Úvod do problému
 * Doménové události
 * Doménová akce
+* Validační pravidla
 
 #### Architektura
 * Požadavky na služby
