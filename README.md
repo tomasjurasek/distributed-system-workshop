@@ -6,7 +6,7 @@ V kurzu se seznámíme s problematikou návrhu distribuovaného systému založe
 
 Ukážeme si, jak navrhnout řešení pro komplexní distribuovaný systém skládající se z několika služeb, které spolu komunikují synchronně i asynchronně s odlišnými požadavky.
 
-Naučíme se, jak pomocí návrhových vzorů - DDD, CQRS, Event Sourcing navrhnout robustní a škálovatelné řešení, které se umí přizpůsobit aktuálnímu vytížení, případně se zotavit z nečekaného problému.
+Naučíme se, jak pomocí návrhových vzorů - DDD, CQRS a Event Sourcing navrhnout robustní a škálovatelné řešení, které se umí přizpůsobit aktuálnímu vytížení, případně se zotavit z nečekaného problému.
 
 ### Cílová skupina
 * Vývojáři
