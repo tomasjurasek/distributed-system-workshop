@@ -2,11 +2,11 @@
 
 # Návrh architektury řízení událostmi pomocí DDD, CQRS a Event Sourcing
 
-V kurzu se seznámíme s problematikou návrhu distribuovaného systému založeném na událostech, neboli event-driven architektura. 
+V kurzu se seznámíme s problematikou návrhu distribuovaného systému založeného na událostech, neboli event-driven architektura. 
 
-Ukážeme si jak navrhnout řešení pro komplexní distribuovaný systém skládající se z několika služeb, které spolu komunikují synchronně i asynchronně s odlišnými požadavky.
+Ukážeme si, jak navrhnout řešení pro komplexní distribuovaný systém skládající se z několika služeb, které spolu komunikují synchronně i asynchronně s odlišnými požadavky.
 
-Naučíme se jak pomocí návrhových vzorů - DDD, CQRS, Event Sourcing navrhnout robustní a škálovatelné řešení, které se umí přizpůsobit aktuálnímu vytížení, případně se zotavit z nečekaného problému.
+Naučíme se, jak pomocí návrhových vzorů - DDD, CQRS, Event Sourcing navrhnout robustní a škálovatelné řešení, které se umí přizpůsobit aktuálnímu vytížení, případně se zotavit z nečekaného problému.
 
 ### Cílová skupina
 * Vývojáři
