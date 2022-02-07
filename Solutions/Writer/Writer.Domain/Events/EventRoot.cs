@@ -3,6 +3,7 @@
 public abstract record EventRoot
 {
     public DateTime CreatedAt { get; init; }
+    public EventType Type { get; init; }
 }
 
 public interface IEvent
