@@ -1,5 +1,4 @@
 ﻿using Writer.Domain.Events;
-
 namespace Writer.Application.Interfaces;
 
 public interface IEventStore
