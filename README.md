@@ -52,5 +52,3 @@ Naučíme se, jak pomocí návrhových vzorů - DDD, CQRS a Event Sourcing navrh
 Délka kurzu: 2 dny  
 Místo: Online  
 Počet: maximálně 5 účastníků  
-
-Registrace na e-mailu [jurasek.tomas@hotmail.cz](mailto:jurasek.tomas@hotmail.cz)
