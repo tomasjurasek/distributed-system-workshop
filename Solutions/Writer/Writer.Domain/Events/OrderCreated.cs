@@ -5,6 +5,8 @@ public record OrderCreated : EventRoot
     public Guid Id { get; init; }
 
     public Contact Contact { get; init; }
+
+    public override EventType Type => throw new NotImplementedException();
 }
 
 public record Contact

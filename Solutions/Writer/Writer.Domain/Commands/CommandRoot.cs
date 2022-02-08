@@ -12,5 +12,9 @@ public abstract record CommandRoot : ICommand
 public interface ICommand
 {
     public DateTime CreatedAt { get; }
+
+    public abstract CommandType Type { get; }
+
+    public abstract Guid GetAggregateId();
 }
 
