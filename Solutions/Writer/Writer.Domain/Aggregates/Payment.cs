@@ -7,12 +7,21 @@ public class Payment : AggregateRoot
 
     public decimal Amount { get; private set; }
 
-    public PaymentStatus Status { get;private set; }
+    public PaymentStatus Status { get; private set; }
 
     public DateTime? RefundedAt { get; private set; }
 
     public void Apply(IEvent @event)
     {
+        switch (@event)
+        {
+            case PaymentCreated e: Apply(e); break;
+            case PaymentRefunded e: Apply(e); break;
+            default:
+                throw new InvalidOperationException();
+        }
+
+        Version += 1;
     }
 
     private void Apply(PaymentCreated @event)
