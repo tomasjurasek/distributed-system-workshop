@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Writer.API.Requests;
+using Writer.Application.Handlers.Commands;
 using Writer.Application.Interfaces;
 using Writer.Domain.Commands;
 
@@ -10,22 +11,31 @@ namespace Writer.API.Controllers;
 public class PaymentsController : ControllerBase
 {
     private readonly IPublisher _publisher;
+    private readonly CreatePaymentCommandHandler _createPaymentCommandHandler;
 
-    public PaymentsController(IPublisher publisher)
+    public PaymentsController(IPublisher publisher, CreatePaymentCommandHandler createPaymentCommandHandler)
     {
         _publisher = publisher;
+        _createPaymentCommandHandler = createPaymentCommandHandler;
     }
 
     [HttpPost]
     public async Task<IActionResult> CreateAsync(CreatePaymentRequest request)
     {
-        await _publisher.PublisAsync(new CreatePayment
+        var command = new CreatePayment
         {
             Amount = request.Amount,
             Currency = request.Currency,
             OrderId = request.OrderId,
-        });
+        };
 
+        var errors = await _createPaymentCommandHandler.GetValidationErrorsAsync(command);
+        if (errors.Any())
+        {
+            return BadRequest(errors);
+        }
+
+        await _publisher.PublisAsync(command);
         return Accepted();
     }
 }
