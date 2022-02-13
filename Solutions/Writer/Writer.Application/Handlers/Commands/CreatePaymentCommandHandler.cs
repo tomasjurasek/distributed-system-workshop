@@ -12,7 +12,9 @@ public class CreatePaymentCommandHandler : CommandHandlerBase<Payment, CreatePay
 
     protected override Task Consume(Payment aggregate, CreatePayment command)
     {
-        throw new NotImplementedException();
+        aggregate = Payment.Create(command.OrderId, command.Currency, command.Amount);
+
+        return Task.CompletedTask;
     }
 }
 

@@ -1,9 +1,9 @@
 ﻿namespace Writer.Domain.Commands;
 
-public record CreateOrder : CommandRoot
+public record CreateOrder : ICommand
 {
     public Guid OrderId { get; set; }
 
-    public override Guid GetAggregateId() => OrderId;
+    public Guid GetAggregateId() => OrderId;
 }
 

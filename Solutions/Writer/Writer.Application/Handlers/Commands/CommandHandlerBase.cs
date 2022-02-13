@@ -14,30 +14,24 @@ public abstract class CommandHandlerBase<TAggregate, TCommand> : ICommandHandler
 
     public CommandHandlerBase(IAggregateLoader<TAggregate> loader, IEventStore eventStore)
     {
-
         _loader = loader;
         _eventStore = eventStore;
     }
+
     public async Task Consume(ConsumeContext<CommandEnvelope> context)
     {
         var envelope = context.Message;
         var command = (TCommand)JsonConvert.DeserializeObject(envelope.Data.ToString());
         var aggregate = await _loader.LoadAsync(command.GetAggregateId());
 
-        await Consume(aggregate, command);
-
-        await _eventStore.StoreAsync(aggregate.UncommitedEvents.ToArray());
-    }
-
-    private Type GetCommandType(CommandType type)
-    {
-        return type switch
+        if(aggregate is null)
         {
-            CommandType.CreateOrder => typeof(CreateOrder),
-            _ => throw new ArgumentOutOfRangeException(),
-        };
-    }
+            //TODO Default
+        }
 
+        await Consume(aggregate, command);
+        await _eventStore.StoreAsync(aggregate!.UncommitedEvents.ToArray());
+    }
 
     protected abstract Task Consume(TAggregate aggregate, TCommand command);
 
