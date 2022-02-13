@@ -22,7 +22,7 @@ public abstract class CommandHandlerBase<TAggregate, TCommand> : ICommandHandler
     {
         var envelope = context.Message;
         var command = (TCommand)JsonConvert.DeserializeObject(envelope.Data.ToString());
-        var aggregate = await _loader.LoadAsync(command.GetAggregateId());
+        var aggregate = await _loader.LoadAsync(command.AggregateId);
 
         if(aggregate is null)
         {

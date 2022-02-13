@@ -1,4 +1,6 @@
-﻿namespace Writer.Domain.Commands;
+﻿using System.Text.Json.Serialization;
+
+namespace Writer.Domain.Commands;
 
 public record CreatePayment : ICommand
 {
@@ -8,6 +10,8 @@ public record CreatePayment : ICommand
 
     public decimal Amount { get; init; }
 
-    public Guid GetAggregateId() => Guid.Empty;
+
+    [JsonIgnore]
+    public Guid AggregateId => Guid.Empty;
 }
 

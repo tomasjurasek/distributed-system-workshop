@@ -2,6 +2,6 @@
 
 public interface ICommand
 {
-    public abstract Guid GetAggregateId();
+    public Guid AggregateId { get; }
 }
 
