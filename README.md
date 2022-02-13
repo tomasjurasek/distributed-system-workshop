@@ -28,9 +28,10 @@ Naučíme se, jak pomocí návrhových vzorů - DDD, CQRS a Event Sourcing navrh
 
 #### Návrh domén
 * Úvod do problému
-* Doménové události
-* Doménová akce
-* Validační pravidla
+* Modelování domén
+  * Události
+  * Akce
+  * Validace
 
 #### Architektura
 * Požadavky na služby
