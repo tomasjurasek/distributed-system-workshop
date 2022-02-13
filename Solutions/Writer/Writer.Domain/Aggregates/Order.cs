@@ -6,8 +6,9 @@ public class Order : AggregateRoot
     public string Product { get; private set; }
     public Contact Contact { get; private set; }
 
-    public void Apply(IEvent @event)
+    protected override void Publish(IEvent @event, bool isHistory = false)
     {
+        throw new NotImplementedException();
     }
 
     private void Apply(OrderCreated @event)

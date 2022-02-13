@@ -1,9 +1,8 @@
 ﻿namespace Writer.Domain.Events;
 
-public record PaymentRefunded : EventRoot
+public record PaymentRefunded : IEvent
 {
     public Guid Id { get; set; }
-
-    public override EventType Type => throw new NotImplementedException();
+    public DateTime CreatedAt { get; set; }
 }
 

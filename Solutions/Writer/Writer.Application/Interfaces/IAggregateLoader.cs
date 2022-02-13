@@ -1,8 +1,9 @@
 ﻿using Writer.Domain.Aggregates;
 namespace Writer.Application.Interfaces;
 
-public interface IAggregateLoader
+public interface IAggregateLoader<TAggregate>
+     where TAggregate : IAggregateRoot
 {
-    Task<IAggregateRoot?> LoadAsync(Guid id);
+    Task<TAggregate?> LoadAsync(Guid id);
 }
 
