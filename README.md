@@ -39,6 +39,7 @@ Naučíme se, jak pomocí návrhových vzorů - DDD, CQRS a Event Sourcing navrh
   * API, Validace, Logika
   * Úložiště - čtecí a zapisovací 
   * Komunikace
+* Logování
 
 #### Retrospektiva    
 * Shrnutí
