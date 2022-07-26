@@ -5,18 +5,17 @@ namespace Writer.Domain.Aggregates;
 public abstract class AggregateRoot : IAggregateRoot
 {
     public Guid Id { get; protected set; }
-
     public int Version { get; protected set; }
 
     public DateTime CreatedAt { get; protected set; }
 
-    protected ICollection<IEvent> _uncommitedEvents = Array.Empty<IEvent>();
+    protected ICollection<IEventEnvelope<IEvent>> _uncommitedEvents = Array.Empty<IEventEnvelope<IEvent>>();
 
-    public IEnumerable<IEvent> UncommitedEvents => _uncommitedEvents;
+    public IEnumerable<IEventEnvelope<IEvent>> UncommitedEvents => _uncommitedEvents;
 
-    protected abstract void Publish(IEvent @event, bool isHistory = false);
+    protected abstract void Publish(IEventEnvelope<IEvent> @event, bool isHistory = false);
 
-    public void LoadFromHistory(ICollection<IEvent> events)
+    public void LoadFromHistory(ICollection<IEventEnvelope<IEvent>> events)
     {
         foreach (var @event in events)
         {
@@ -27,14 +26,14 @@ public abstract class AggregateRoot : IAggregateRoot
 
 public interface IAggregateRoot
 {
-    public Guid Id { get; }
+    Guid Id { get; }
 
-    public int Version { get; }
+    DateTime CreatedAt { get; }
 
-    public DateTime CreatedAt { get; }
+    int Version { get; }
 
-    public IEnumerable<IEvent> UncommitedEvents { get; }
+    IEnumerable<IEventEnvelope<IEvent>> UncommitedEvents { get; }
 
-    public void LoadFromHistory(ICollection<IEvent> events);
+    void LoadFromHistory(ICollection<IEventEnvelope<IEvent>> events);
 }
 

@@ -14,4 +14,8 @@
     <ProjectReference Include="..\Writer.Application\Writer.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Storages\" />
+  </ItemGroup>
+
 </Project>

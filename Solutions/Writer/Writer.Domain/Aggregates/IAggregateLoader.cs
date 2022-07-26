@@ -1,5 +1,4 @@
-﻿using Writer.Domain.Aggregates;
-namespace Writer.Application.Interfaces;
+﻿namespace Writer.Domain.Aggregates;
 
 public interface IAggregateLoader<TAggregate>
      where TAggregate : IAggregateRoot
