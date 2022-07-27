@@ -9,7 +9,7 @@ public class ProductAggregate : AggregateRoot
     public string Desription { get; private set; }
     public int Quantity { get; private set; }
     public string ImageUrl { get; private set; }
-    public ProductStatus Status  { get; private set; }
+    public ProductStatus Status { get; private set; }
 
     public static ProductAggregate Create(string code, string description, string imageUrl, int quantity) => new ProductAggregate(code, description, imageUrl, quantity);
 
@@ -17,8 +17,12 @@ public class ProductAggregate : AggregateRoot
     {
         if (quantity < 0)
         {
-            throw new InvalidBusinessValidationException(); // TODO
+            throw new ArgumentOutOfRangeException(nameof(quantity));
         }
+
+        ArgumentNullException.ThrowIfNull(code);
+        ArgumentNullException.ThrowIfNull(description);
+       
 
         Publish(new ProductCreatedEventEnvelope
         {
@@ -32,6 +36,7 @@ public class ProductAggregate : AggregateRoot
                 Description = description,
                 ImageUrl = imageUrl,
                 Quantity = quantity,
+
             }
         });
     }

@@ -14,12 +14,12 @@ internal class Publisher : IPublisher
     }
     public async Task PublisAsync(ICommand command)
     {
-        await _publisher.Publish(new CommandEnvelope
-        {
-            CreatedAt = DateTime.UtcNow,
-            Type = CommandType.CreatePayment, // TODO Type
-            Data = command
-        });
+        //await _publisher.Publish(new CommandEnvelope
+        //{
+        //    CreatedAt = DateTime.UtcNow,
+        //    Type = CommandType.CreatePayment, // TODO Type
+        //    Data = command
+        //});
     }
 }
 

@@ -1,4 +1,4 @@
-﻿namespace Writer.Domain.Commands;
+﻿namespace Writer.Application.Handlers.Commands;
 
 public enum CommandType
 {
