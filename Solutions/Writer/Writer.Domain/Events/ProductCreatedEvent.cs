@@ -1,5 +1,4 @@
-﻿using Writer.Domain.Events;
-namespace Writer.Domain.Events;
+﻿namespace Writer.Domain.Events;
 
 public record ProductCreatedEvent : IEvent
 {
@@ -7,4 +6,5 @@ public record ProductCreatedEvent : IEvent
     public string Description { get; init; }
     public int Quantity { get; init; }
     public string ImageUrl { get; init; }
+    public DateTime CreatedAt { get; init; }
 }

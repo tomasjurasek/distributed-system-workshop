@@ -1,5 +1,6 @@
-﻿using Writer.Domain.Events;
-using Writer.Domain.Exceptions;
+﻿using Dawn;
+using Writer.Domain.Aggregates.Root;
+using Writer.Domain.Events;
 
 namespace Writer.Domain.Aggregates;
 
@@ -11,58 +12,47 @@ public class ProductAggregate : AggregateRoot
     public string ImageUrl { get; private set; }
     public ProductStatus Status { get; private set; }
 
-    public static ProductAggregate Create(string code, string description, string imageUrl, int quantity) => new ProductAggregate(code, description, imageUrl, quantity);
-
-    internal ProductAggregate(string code, string description, string imageUrl, int quantity)
+    internal ProductAggregate(string code, string description, string imageUrl, int quantity, DateTime createdAt)
     {
-        if (quantity < 0)
+        Guard.Argument(quantity, nameof(quantity)).NotNegative();
+        Guard.Argument(code, nameof(code)).NotNull().NotEmpty();
+        Guard.Argument(description, nameof(description)).NotNull().NotEmpty();
+
+        var @event = new ProductCreatedEvent
         {
-            throw new ArgumentOutOfRangeException(nameof(quantity));
-        }
+            CreatedAt = createdAt,
+            Code = code,
+            Description = description,
+            ImageUrl = imageUrl,
+            Quantity = quantity,
+        };
 
-        ArgumentNullException.ThrowIfNull(code);
-        ArgumentNullException.ThrowIfNull(description);
-       
-
-        Publish(new ProductCreatedEventEnvelope
-        {
-            Type = EventType.ProductCreated,
-            CreatedAt = DateTime.UtcNow,
-            CorrelationId = Guid.NewGuid(),
-            Version = 1,
-            Event = new ProductCreatedEvent
-            {
-                Code = code,
-                Description = description,
-                ImageUrl = imageUrl,
-                Quantity = quantity,
-
-            }
-        });
+        Publish(@event);
     }
 
-    protected override void Publish(IEventEnvelope<IEvent> envelope, bool isHistory = false)
+    protected override void Publish(IEvent @event, bool isHistory = false)
     {
-        switch (envelope)
+        switch (@event)
         {
-            case ProductCreatedEventEnvelope e: Apply(e); break;
+            case ProductCreatedEvent e: Apply(e); break;
             default:
                 throw new InvalidOperationException();
         }
 
         if (!isHistory)
         {
-            _uncommitedEvents.Add(envelope);
+            _uncommitedEvents.Add(@event);
         }
 
         Version += 1;
     }
 
-    private void Apply(ProductCreatedEventEnvelope envelope)
+    private void Apply(ProductCreatedEvent @event)
     {
-        Code = envelope.Event.Code;
-        Desription = envelope.Event.Description;
-        Quantity = envelope.Event.Quantity;
-        ImageUrl = envelope.Event.ImageUrl;
+        CreatedAt = @event.CreatedAt;
+        Code = @event.Code;
+        Desription = @event.Description;
+        Quantity = @event.Quantity;
+        ImageUrl = @event.ImageUrl;
     }
 }

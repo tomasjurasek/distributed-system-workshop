@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Writer.Application.Interfaces;
 using Writer.Domain.Aggregates;
+using Writer.Domain.Aggregates.Root;
 using Writer.Domain.Commands;
 namespace Writer.Application.Handlers.Commands;
 
@@ -9,16 +10,13 @@ public abstract class CommandHandlerBase<TAggregate, TCommand> : ICommandHandler
     where TAggregate : IAggregateRoot
     where TCommand : ICommand, new()
 {
-    private readonly IAggregateLoader<TAggregate> _loader;
-    private readonly IEventStore _eventStore;
 
-    public CommandHandlerBase(IAggregateLoader<TAggregate> loader, IEventStore eventStore)
+    public CommandHandlerBase()
     {
-        _loader = loader;
-        _eventStore = eventStore;
+      
     }
 
-    public async Task Consume(ConsumeContext<CommandEnvelope> context)
+    public async Task Consume(ConsumeContext<IEvent> context)
     {
         var envelope = context.Message;
         var command = (TCommand)JsonConvert.DeserializeObject(envelope.Data.ToString());
