@@ -1,56 +1,7 @@
 <!-- ![EDA](/images/EDA.png) -->
 
-# Návrh architektury řízení událostmi pomocí DDD, CQRS a Event Sourcing
+# Návrh distribuovaného systému s pomocí DDD, Event Sourcing a CQRS 
 
-V kurzu se seznámíme s problematikou návrhu distribuovaného systému založeného na událostech, neboli event-driven architektura. 
+Naučíme se, jak přistupovat k návrhu domény pomocí **Domain Driven Design** a **Event Storming** přístupu, kde je kladen důraz na pochopení problematiky a její správný návrh a vizualizaci. Dále si ukážeme, jak pomocí **Event Sourcing** ukládat stavy doménových objektů a na závěr si rozdělíme zodpovědnost systému na zapisovací a čtecí část pomocí návrhového vzoru **CQRS**.
 
-Ukážeme si, jak navrhnout řešení pro komplexní distribuovaný systém skládající se z několika služeb, které spolu komunikují synchronně i asynchronně s odlišnými požadavky.
-
-Naučíme se, jak pomocí návrhových vzorů - DDD, CQRS a Event Sourcing navrhnout robustní a škálovatelné řešení, které se umí přizpůsobit aktuálnímu vytížení, případně se zotavit z nečekaného problému.
-
-### Cílová skupina
-* Vývojáři
-* Architekti
-
-### Osnova
-#### Distribuovaný systém
-* Úvod do problematiky
-
-#### Základní pojmy 
-* Synchronní versus Asynchronní komunikace
-* Reaktivní přístup
-* Eventuální konzistence, Neměnné objekty, Konkurentní konflikty...
-
-#### Návrhové vzory
-* Domain-Driven Design
-* CQRS
-* Event Sourcing
-
-#### Návrh domén
-* Úvod do problému
-* Modelování domén
-  * Události
-  * Akce
-  * Validace
-
-#### Architektura
-* Požadavky na služby
-* Návrh služeb
-  * API, Validace, Logika
-  * Úložiště - čtecí a zapisovací 
-  * Komunikace
-* Logování
-
-#### Retrospektiva    
-* Shrnutí
-
-### Předpoklady účastníka
-* Obecná znalost programování (kurz není zaměřen na specifický programovací jazyk)
-* Základní znalost problematiky distribuovaných systémů
-* Základní znalost vývojových diagramů 
-
-
-### Základní informace kurzu
-Délka kurzu: 2 dny  
-Místo: Online  
-Počet: maximálně 5 účastníků  
+V průběhu celého návrhu nesmíme zapomenout správně vydefinovat **metriky** a **logování**, které nám usnadní přehled a pohled na **monitorování** systému.

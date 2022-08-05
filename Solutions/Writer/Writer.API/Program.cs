@@ -20,7 +20,7 @@ builder.Services.AddInfrastructure();
 
 builder.Services.AddMassTransit(x =>
 {
-    x.AddConsumer<CreatePaymentCommandHandler>();
+    //x.AddConsumer<CreatePaymentCommandHandler>();
     x.UsingInMemory((context, cfg) =>
     {
         cfg.ConfigureEndpoints(context);

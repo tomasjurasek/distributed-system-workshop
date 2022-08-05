@@ -1,4 +1,4 @@
-﻿namespace Writer.Application.Handlers.Commands
+﻿namespace Writer.Application.Handlers.Commands.Base;
 {
     public record CommandResult
     {
