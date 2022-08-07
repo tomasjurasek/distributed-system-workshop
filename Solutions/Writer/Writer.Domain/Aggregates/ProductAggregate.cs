@@ -20,6 +20,7 @@ public class ProductAggregate : AggregateRoot
 
         var @event = new ProductCreatedEvent
         {
+            Id = Guid.NewGuid(),
             CreatedAt = createdAt,
             Code = code,
             Description = description,
@@ -49,6 +50,7 @@ public class ProductAggregate : AggregateRoot
 
     private void Apply(ProductCreatedEvent @event)
     {
+        Id = @event.Id;
         CreatedAt = @event.CreatedAt;
         Code = @event.Code;
         Desription = @event.Description;

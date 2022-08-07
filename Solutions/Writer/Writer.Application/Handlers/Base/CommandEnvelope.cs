@@ -1,4 +1,4 @@
-﻿namespace Writer.Application.Handlers.Commands.Base;
+﻿namespace Writer.Application.Handlers.Base;
 
 public abstract record CommandEnvelope<TCommand> : ICommandEnvelope<TCommand> where TCommand : ICommand
 {

@@ -12,17 +12,13 @@
     <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
     <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.3.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Writer.Application\Writer.Application.csproj" />
     <ProjectReference Include="..\Writer.Domain\Writer.Domain.csproj" />
     <ProjectReference Include="..\Writer.Infrastructure\Writer.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Requests\" />
   </ItemGroup>
 
 </Project>

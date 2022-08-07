@@ -1,5 +1,5 @@
 using MassTransit;
-using Writer.Application.Handlers.Commands;
+using Writer.Application.Handlers.CreateProduct;
 using Writer.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,24 +10,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGenNewtonsoftSupport();
+
 builder.Services.AddInfrastructure();
 
-//builder.Services.AddMarten(opts =>
-//{
-//    opts.Connection("CS"); // TODO
-//    opts.AutoCreateSchemaObjects = AutoCreate.All;
-//});
-
-builder.Services.AddMassTransit(x =>
+builder.Services.AddMediator(cfg =>
 {
-    //x.AddConsumer<CreatePaymentCommandHandler>();
-    x.UsingInMemory((context, cfg) =>
-    {
-        cfg.ConfigureEndpoints(context);
-    });
+    cfg.AddConsumer<CreateProductCommandHandler>();
 });
-
-builder.Services.AddMassTransitHostedService();
 
 
 var app = builder.Build();

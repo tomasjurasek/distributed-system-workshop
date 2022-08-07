@@ -1,7 +1,7 @@
 ﻿using MassTransit;
-using Writer.Application.Interfaces;
 using Writer.Domain.Aggregates.Root;
-namespace Writer.Application.Handlers.Commands.Base;
+
+namespace Writer.Application.Handlers.Base;
 
 public abstract class CommandHandlerBase<TAggregate, TCommand> : ICommandHandler<TAggregate, TCommand>
     where TAggregate : IAggregateRoot
@@ -17,7 +17,7 @@ public abstract class CommandHandlerBase<TAggregate, TCommand> : ICommandHandler
         throw new NotImplementedException();
     }
 
-    protected abstract Task Consume(TAggregate aggregate, TCommand command, IMetadata metadata);
+    protected abstract Task Consume(TAggregate aggregate, TCommand command, Guid correlationId);
 
 }
 

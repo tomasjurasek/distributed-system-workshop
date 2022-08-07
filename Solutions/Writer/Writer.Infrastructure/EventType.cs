@@ -1,4 +1,4 @@
-﻿namespace Writer.Domain.Events;
+﻿namespace Writer.Infrastructure;
 
 public enum EventType
 {

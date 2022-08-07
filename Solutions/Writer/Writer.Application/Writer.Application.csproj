@@ -14,9 +14,4 @@
     <ProjectReference Include="..\Writer.Domain\Writer.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Messages\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>
