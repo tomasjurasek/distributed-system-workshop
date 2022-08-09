@@ -10,8 +10,4 @@
     <PackageReference Include="Dawn.Guard" Version="1.12.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Writer.Common\Writer.Common.csproj" />
-  </ItemGroup>
-
 </Project>

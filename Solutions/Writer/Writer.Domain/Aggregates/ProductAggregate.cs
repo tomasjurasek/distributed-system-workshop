@@ -1,4 +1,5 @@
 ﻿using Dawn;
+using Writer.Common;
 using Writer.Domain.Aggregates.Root;
 using Writer.Domain.Events;
 
@@ -31,11 +32,45 @@ public class ProductAggregate : AggregateRoot
         Publish(@event);
     }
 
+    public Result ChangeQuantity(int quantity)
+    {
+        if (quantity <= 0)
+        {
+            return new ErrorResult<int>(quantity, nameof(quantity));
+        }
+
+        Publish(new ProductQuantityChangedEvent
+        {
+            Id = Id,
+            Quantity = quantity
+        });
+
+        return new SuccessResult();
+    }
+
+    public Result ChangeCode(string code)
+    {
+        if (string.IsNullOrEmpty(code))
+        {
+            return new ErrorResult<string>(code, nameof(code));
+        }
+
+        Publish(new ProductCodeChangedEvent
+        {
+            Id = Id,
+            Code = code
+        });
+
+        return new SuccessResult();
+    }
+
     protected override void Publish(IEvent @event, bool isHistory = false)
     {
         switch (@event)
         {
             case ProductCreatedEvent e: Apply(e); break;
+            case ProductQuantityChangedEvent e: Apply(e); break;
+            case ProductCodeChangedEvent e: Apply(e); break;
             default:
                 throw new InvalidOperationException();
         }
@@ -56,5 +91,17 @@ public class ProductAggregate : AggregateRoot
         Desription = @event.Description;
         Quantity = @event.Quantity;
         ImageUrl = @event.ImageUrl;
+    }
+
+    private void Apply(ProductQuantityChangedEvent @event)
+    {
+        Id = @event.Id;
+        Quantity = @event.Quantity;
+    }
+
+    private void Apply(ProductCodeChangedEvent @event)
+    {
+        Id = @event.Id;
+        Code = @event.Code;
     }
 }
