@@ -1,26 +1,36 @@
-﻿using MassTransit.Mediator;
+﻿using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Writer.Application.Handlers.Base;
+using Writer.Application.Handlers.CreateOrder;
 
 namespace Writer.API.Controllers;
 
 [ApiController()]
 public class CommandsController : ControllerBase
 {
-    private readonly IMediator _mediator;
+    private readonly IRequestClient<CreateOrderCommand> _request;
 
-    public CommandsController(IMediator mediator)
+    public CommandsController(IRequestClient<CreateOrderCommand> request)
     {
-        _mediator = mediator;
+        _request = request;
     }
 
-    [HttpPost("")]
-    public async Task<ActionResult<CommandResult>> SendAsync(ICommandEnvelope<ICommand> command)
+    [HttpPost("v1/create-order")]
+    public async Task<ActionResult> CreateOrderAsync(
+        [FromBody] CreateOrderCommand command)
     {
 
-        return Ok(new CommandResult
+        var response = await _request.GetResponse<SuccessResult, ErrorResult>(command);
+        if (response.Is(out Response<SuccessResult> success))
         {
+            return Ok(success.Message.Id);
+        }
 
-        });
+        if (response.Is(out Response<ErrorResult> error))
+        {
+            return BadRequest(error.Message.Errors);
+        }
+
+        return Ok(); // TOOD
     }
 }

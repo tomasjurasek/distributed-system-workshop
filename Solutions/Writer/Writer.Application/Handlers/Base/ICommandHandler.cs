@@ -3,9 +3,8 @@ using Writer.Domain.Aggregates.Root;
 
 namespace Writer.Application.Handlers.Base;
 
-public interface ICommandHandler<TAggregate, TCommand> : IConsumer<ICommandEnvelope<TCommand>>
-    where TAggregate : IAggregateRoot
-    where TCommand : ICommand
+public interface ICommandHandler<TCommand> : IConsumer<TCommand>
+    where TCommand : class, ICommand
 
 {
 

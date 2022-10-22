@@ -1,12 +1,13 @@
 using MassTransit;
-using Writer.Application.Handlers.CreateProduct;
+using Writer.API.Controllers;
+using Writer.Application.Handlers.CreateOrder;
 using Writer.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -14,9 +15,15 @@ builder.Services.AddSwaggerGenNewtonsoftSupport();
 
 builder.Services.AddInfrastructure();
 
-builder.Services.AddMediator(cfg =>
+builder.Services.AddMassTransit(x =>
 {
-    cfg.AddConsumer<CreateProductCommandHandler>();
+    x.AddConsumer<CreateOrderCommandHandler>();
+    x.AddRequestClient<CreateOrderCommand>();
+
+    x.UsingInMemory((context, cfg) =>
+    {
+        cfg.ConfigureEndpoints(context);
+    });
 });
 
 

@@ -4,7 +4,7 @@ namespace Writer.Domain.Aggregates.Root;
 
 public abstract class AggregateRoot : IAggregateRoot
 {
-    public Guid Id { get; protected set; } // Do I need it?
+    public Guid Id { get; protected set; }
 
     public int Version { get; protected set; }
 

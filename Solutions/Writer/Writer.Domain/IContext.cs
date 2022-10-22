@@ -1,6 +1,6 @@
 ﻿namespace Writer.Domain;
 
-public interface IMetadata
+public interface IContext // TODO naming
 {
     Guid CorrelationId { get; init; }
 }
