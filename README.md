@@ -5,3 +5,15 @@
 Naučíme se, jak přistupovat k návrhu domény pomocí **Domain Driven Design** a **Event Storming** přístupu, kde je kladen důraz na pochopení problematiky a její správný návrh a vizualizaci. Dále si ukážeme, jak pomocí **Event Sourcing** ukládat stavy doménových objektů a na závěr si rozdělíme zodpovědnost systému na zapisovací a čtecí část pomocí návrhového vzoru **CQRS**. 
 
 V průběhu celého návrhu nesmíme zapomenout správně vydefinovat **metriky** a **logování**, které nám usnadní měření důležitých hodnot a **monitorování** systému.
+
+
+## Osnova
+### 1. Úvod do architektury
+* TBD
+### 2. Návrhové vzory
+* TBD
+### 3. Návrh architektury
+* TBD
+### 4. Vývoj systému
+* TBD
+
