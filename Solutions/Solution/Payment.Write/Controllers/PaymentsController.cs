@@ -1,6 +1,6 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Payment.Write.Domain.Entities;
-using Payment.Write.Domain.Repositories;
+using Payment.Write.Application.Commands;
 using System.Diagnostics.Metrics;
 
 namespace Payment.Write.Controllers
@@ -12,13 +12,14 @@ namespace Payment.Write.Controllers
         private static Counter<int>  counter = new Meter("Payment").CreateCounter<int>("payment-created", "Payment");
 
         private readonly ILogger<PaymentsController> _logger;
-        private readonly IPaymentRepository repo;
+        private readonly IMediator _mediator;
 
-        public PaymentsController(ILogger<PaymentsController> logger,
-            IPaymentRepository repo)
+        public PaymentsController(
+            ILogger<PaymentsController> logger,
+            IMediator mediator)
         {
             _logger = logger;
-            this.repo = repo;
+            _mediator = mediator;
         }
 
         [HttpGet]
@@ -29,11 +30,9 @@ namespace Payment.Write.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(CreatePaymentCommand command)
         {
-            var payment = PaymentAggregate.Create();
-            await repo.StoreAsyc(payment);
-            counter.Add(1);
+            await _mediator.Send(command);
             return Ok();
         }
     }

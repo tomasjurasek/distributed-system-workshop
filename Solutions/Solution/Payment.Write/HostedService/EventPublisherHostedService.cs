@@ -4,15 +4,20 @@ namespace Payment.Write.HostedService
 {
     public class EventPublisherHostedService : BackgroundService
     {
-        private readonly IEventPublisher _eventPublisher;
+        private readonly IServiceScopeFactory _serviceScopeFactory;
 
-        public EventPublisherHostedService(IEventPublisher eventPublisher)
+        public EventPublisherHostedService(IServiceScopeFactory serviceScopeFactory)
         {
-            _eventPublisher = eventPublisher;
+            _serviceScopeFactory = serviceScopeFactory;
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await _eventPublisher.StartAsync();
+            using (var scope = _serviceScopeFactory.CreateScope())
+            {
+                var eventPublisher = scope.ServiceProvider.GetRequiredService<IEventPublisher>();
+                await eventPublisher.StartAsync();
+            }
+          
         }
     }
 }

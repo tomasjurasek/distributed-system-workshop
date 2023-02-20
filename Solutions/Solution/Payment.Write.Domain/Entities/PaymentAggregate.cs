@@ -4,49 +4,21 @@ namespace Payment.Write.Domain.Entities
 {
     public class PaymentAggregate : Aggregate
     {
-
-        public static PaymentAggregate Create() => new PaymentAggregate();
-        public static PaymentAggregate LoadHistory(IList<IEvent> events) => new PaymentAggregate(events);
-
-
-        internal PaymentAggregate(IList<IEvent> events = null)
+        public PaymentAggregate(decimal amount, string currency) : base()
         {
-
-            if(events is null)
+            Apply(new PaymentCreated
             {
-                Apply(new PaymentCreated
-                {
-                    Id = Guid.NewGuid(),
-                    AggregateId = Guid.NewGuid(),
-                    CreatedAt = DateTime.UtcNow,
-                }, false);
-            }
-
-            else
-            {
-                base.LoadHistory(events);
-            }
-            
+                CreatedAt = DateTime.UtcNow,
+                Amount = amount,
+                Currency = currency,
+                AggregateId = Guid.NewGuid(),
+                Id = Guid.NewGuid()
+            });
         }
 
-        protected override void Apply(IEvent @event, bool isHistory = false)
-        {
-            switch (@event)
-            {
-                case PaymentCreated e: Apply(e); break;
-                default:
-                    throw new InvalidOperationException();
-            }
+        public PaymentAggregate(IList<IEvent> events) : base(events) { }
 
-            if (!isHistory)
-            {
-                _uncommitedEvents.Add(@event);
-            }
-
-            Version += 1;
-        }
-
-        private void Apply(PaymentCreated @event)
+        private void On(PaymentCreated @event)
         {
             Id = @event.AggregateId;
             CreatedAt = @event.CreatedAt;

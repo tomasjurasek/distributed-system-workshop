@@ -38,7 +38,7 @@ namespace Payment.Write.Application
                 throw new Exception();
             }
 
-            return PaymentAggregate.LoadHistory(parsedEvents!);
+            return new PaymentAggregate(parsedEvents!);
 
         }
 

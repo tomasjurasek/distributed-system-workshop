@@ -1,12 +1,16 @@
+using MassTransit;
 using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 using Payment.Write.Application;
+using Payment.Write.Application.Commands;
 using Payment.Write.Application.Publishers;
 using Payment.Write.Application.Settings;
+using Payment.Write.Domain.Events;
 using Payment.Write.Domain.Repositories;
 using Payment.Write.HostedService;
+using RabbitMQ.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,8 +44,30 @@ builder.Services.AddOpenTelemetry()
 builder.Services.Configure<EventStoreSettings>(builder.Configuration.GetSection("EventStore"));
 
 builder.Services.AddSingleton<IPaymentRepository, PaymentRepository>();
-builder.Services.AddSingleton<IEventPublisher, EventPublisher>();
+builder.Services.AddScoped<IEventPublisher, EventPublisher>();
 builder.Services.AddHostedService<EventPublisherHostedService>();
+
+builder.Services.AddMediatR(cfg => {
+    cfg.RegisterServicesFromAssembly(typeof(CreatePaymentCommand).Assembly);
+});
+
+builder.Services.AddMassTransit(mt =>
+{
+    mt.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("localhost", "service", h =>
+        {
+            h.Username("guest");
+            h.Password("guest");
+        });
+
+        cfg.Message<PaymentCreated>(e => e.SetEntityName("payment-created"));
+        cfg.Publish<PaymentCreated>(e => e.ExchangeType = ExchangeType.Topic);
+        
+    });
+});
+
+//builder.Services.AddMassTransitHostedService();
 
 var app = builder.Build();
 

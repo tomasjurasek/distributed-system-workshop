@@ -1,4 +1,5 @@
 ﻿using EventStore.Client;
+using MassTransit;
 using Microsoft.Extensions.Options;
 using Payment.Write.Application.Helpers;
 using Payment.Write.Application.Settings;
@@ -10,12 +11,14 @@ namespace Payment.Write.Application.Publishers
 {
     public class EventPublisher : IEventPublisher
     {
+        private readonly IPublishEndpoint _publishEndpoint;
         private EventStoreClient _store;
 
-        public EventPublisher(IOptions<EventStoreSettings> settings)
+        public EventPublisher(IOptions<EventStoreSettings> settings, IPublishEndpoint publishEndpoint)
         {
             var eventStoreClientSettings = EventStoreClientSettings.Create(settings.Value.ConnectionString);
             _store = new EventStoreClient(eventStoreClientSettings);
+            _publishEndpoint = publishEndpoint;
         }
         public async Task StartAsync()
         {
@@ -23,21 +26,21 @@ namespace Payment.Write.Application.Publishers
                 filterOptions: new SubscriptionFilterOptions(EventTypeFilter.ExcludeSystemEvents()));
         }
 
-        private Task EventReceivedAsync(StreamSubscription _, ResolvedEvent resolvedEvent, CancellationToken c)
+        private async Task EventReceivedAsync(StreamSubscription _, ResolvedEvent resolvedEvent, CancellationToken c)
         {
             try
             {
                 var type = EventTypeHelper.GetType(resolvedEvent.Event.EventType);
                 var jsonData = Encoding.UTF8.GetString(resolvedEvent.Event.Data.ToArray());
-                var domainEvent = (IEvent)JsonSerializer.Deserialize(jsonData, type);
+                var @event = (IEvent)JsonSerializer.Deserialize(jsonData, type);
+
+                await _publishEndpoint.Publish(type, @event);
 
             }
             catch (Exception e)
             {
                 // LOG
             }
-
-            return Task.CompletedTask;
         }
     }
 

@@ -1,7 +1,8 @@
-﻿namespace Payment.Write.Domain.Events
+﻿namespace Payment.Read.DTO
 {
-    public record PaymentCreated : Event
+    public record PaymentDTO
     {
+        public Guid Id { get; init; }
         public decimal Amount { get; init; }
         public string Currency { get; init; }
     }
