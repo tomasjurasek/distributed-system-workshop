@@ -1,4 +1,4 @@
-﻿namespace Payment.Write.Domain.Events
+﻿namespace Payment.Contracts.Events
 {
     public abstract record Event : IEvent
     {

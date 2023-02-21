@@ -1,4 +1,4 @@
-﻿using Payment.Write.Domain.Events;
+﻿using Payment.Contracts.Events;
 
 namespace Payment.Write.Application.Helpers
 {

@@ -1,7 +1,7 @@
 ﻿using MassTransit;
 using Microsoft.Extensions.Caching.Distributed;
-using Payment.Read.DTO;
-using Payment.Write.Domain.Events;
+using Payment.Contracts.Events;
+using Payment.Read.Application.DTO;
 using System.Text.Json;
 
 namespace Payment.Read.Handlers
@@ -25,7 +25,7 @@ namespace Payment.Read.Handlers
                 Currency = context.Message.Currency
             };
 
-            await _cache.SetStringAsync(context.Message.Id.ToString(), JsonSerializer.Serialize(context.Message));
+            await _cache.SetStringAsync(context.Message.Id.ToString(), JsonSerializer.Serialize(payment));
            
         }
     }

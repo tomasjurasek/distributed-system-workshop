@@ -1,9 +1,9 @@
 ﻿using EventStore.Client;
 using Microsoft.Extensions.Options;
+using Payment.Contracts.Events;
 using Payment.Write.Application.Helpers;
 using Payment.Write.Application.Settings;
 using Payment.Write.Domain.Entities;
-using Payment.Write.Domain.Events;
 using Payment.Write.Domain.Repositories;
 using System.Text;
 using System.Text.Json;

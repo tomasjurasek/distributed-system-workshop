@@ -1,9 +1,9 @@
 ﻿using EventStore.Client;
 using MassTransit;
 using Microsoft.Extensions.Options;
+using Payment.Contracts.Events;
 using Payment.Write.Application.Helpers;
 using Payment.Write.Application.Settings;
-using Payment.Write.Domain.Events;
 using System.Text;
 using System.Text.Json;
 
@@ -28,24 +28,11 @@ namespace Payment.Write.Application.Publishers
 
         private async Task EventReceivedAsync(StreamSubscription _, ResolvedEvent resolvedEvent, CancellationToken c)
         {
-            try
-            {
-                var type = EventTypeHelper.GetType(resolvedEvent.Event.EventType);
-                var jsonData = Encoding.UTF8.GetString(resolvedEvent.Event.Data.ToArray());
-                var @event = (IEvent)JsonSerializer.Deserialize(jsonData, type);
+            var type = EventTypeHelper.GetType(resolvedEvent.Event.EventType);
+            var jsonData = Encoding.UTF8.GetString(resolvedEvent.Event.Data.ToArray());
+            var @event = (IEvent)JsonSerializer.Deserialize(jsonData, type);
 
-                await _publishEndpoint.Publish(type, @event);
-
-            }
-            catch (Exception e)
-            {
-                // LOG
-            }
+            await _publishEndpoint.Publish(type, @event);
         }
-    }
-
-    public interface IEventPublisher
-    {
-        Task StartAsync();
     }
 }

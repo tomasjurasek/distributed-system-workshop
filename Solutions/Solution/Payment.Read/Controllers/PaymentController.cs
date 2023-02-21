@@ -1,6 +1,6 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
-using System.Text.Json;
+using Payment.Read.Application.Queries;
 
 namespace Payment.Read.Controllers
 {
@@ -8,19 +8,24 @@ namespace Payment.Read.Controllers
     [Route("[controller]")]
     public class PaymentController : ControllerBase
     {
-        private readonly IDistributedCache _cache;
+        private readonly IMediator _mediator;
 
-        public PaymentController(IDistributedCache cache)
+        public PaymentController(IMediator mediator)
         {
-            _cache = cache;
+            _mediator = mediator;
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var jsonData = await _cache.GetAsync(id.ToString());
+            var payment = await _mediator.Send(new GetPaymentQuery { Id = id });
 
-            return Ok(jsonData);
+            if(payment is null)
+            {
+                return NoContent();
+            }
+
+            return Ok(payment);
         }
     }
 }

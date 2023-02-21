@@ -1,8 +1,7 @@
-﻿namespace Payment.Read.DTO
+﻿namespace Payment.Contracts.Events
 {
-    public record PaymentDTO
+    public record PaymentCreated : Event
     {
-        public Guid Id { get; init; }
         public decimal Amount { get; init; }
         public string Currency { get; init; }
     }

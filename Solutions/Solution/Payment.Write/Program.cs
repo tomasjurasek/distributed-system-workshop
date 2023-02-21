@@ -1,13 +1,12 @@
 using MassTransit;
-using OpenTelemetry;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using Payment.Contracts.Events;
 using Payment.Write.Application;
 using Payment.Write.Application.Commands;
 using Payment.Write.Application.Publishers;
 using Payment.Write.Application.Settings;
-using Payment.Write.Domain.Events;
 using Payment.Write.Domain.Repositories;
 using Payment.Write.HostedService;
 using RabbitMQ.Client;
