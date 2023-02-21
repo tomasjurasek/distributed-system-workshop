@@ -5,6 +5,7 @@ using OpenTelemetry.Trace;
 using Payment.Contracts.Events;
 using Payment.Write.Application;
 using Payment.Write.Application.Commands;
+using Payment.Write.Application.Metrics;
 using Payment.Write.Application.Publishers;
 using Payment.Write.Application.Settings;
 using Payment.Write.Domain.Repositories;
@@ -43,6 +44,7 @@ builder.Services.AddOpenTelemetry()
 builder.Services.Configure<EventStoreSettings>(builder.Configuration.GetSection("EventStore"));
 
 builder.Services.AddSingleton<IPaymentRepository, PaymentRepository>();
+builder.Services.AddSingleton<IMetrics, Metrics>();
 builder.Services.AddScoped<IEventPublisher, EventPublisher>();
 builder.Services.AddHostedService<EventPublisherHostedService>();
 

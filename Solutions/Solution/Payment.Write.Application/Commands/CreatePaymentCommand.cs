@@ -6,5 +6,6 @@ namespace Payment.Write.Application.Commands
     {
         public decimal Amount { get; init; }
         public string  Currency { get; init; }
+        public Guid OrderId { get; init; }
     }
 }
