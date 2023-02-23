@@ -1,6 +1,6 @@
-﻿using Payment.Write.Application.Publishers;
+﻿using Order.Write.Application.Publishers;
 
-namespace Payment.Write.HostedService
+namespace Order.Write.HostedService
 {
     public class EventPublisherHostedService : BackgroundService
     {

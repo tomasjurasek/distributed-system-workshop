@@ -1,13 +1,13 @@
 ﻿using EventStore.Client;
 using MassTransit;
 using Microsoft.Extensions.Options;
-using Payment.Contracts.Events;
-using Payment.Write.Application.Helpers;
-using Payment.Write.Application.Settings;
+using Order.Contracts.Events;
+using Order.Write.Application.Helpers;
+using Order.Write.Application.Settings;
 using System.Text;
 using System.Text.Json;
 
-namespace Payment.Write.Application.Publishers
+namespace Order.Write.Application.Publishers
 {
     public class EventPublisher : IEventPublisher
     {

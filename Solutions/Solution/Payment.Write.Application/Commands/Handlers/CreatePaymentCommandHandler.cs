@@ -1,26 +1,26 @@
 ﻿using MediatR;
-using Payment.Write.Application.Metrics;
-using Payment.Write.Domain.Entities;
-using Payment.Write.Domain.Repositories;
+using Order.Write.Application.Metrics;
+using Order.Write.Domain.Entities;
+using Order.Write.Domain.Repositories;
 
-namespace Payment.Write.Application.Commands.Handlers
+namespace Order.Write.Application.Commands.Handlers
 {
-    public class CreatePaymentCommandHandler : IRequestHandler<CreatePaymentCommand>
+    public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand>
     {
-        private readonly IPaymentRepository _paymentRepository;
+        private readonly IOrderRepository _OrderRepository;
         private readonly IMetrics _metrics;
 
-        public CreatePaymentCommandHandler(IPaymentRepository paymentRepository, IMetrics metrics)
+        public CreateOrderCommandHandler(IOrderRepository OrderRepository, IMetrics metrics)
         {
-            _paymentRepository = paymentRepository;
+            _OrderRepository = OrderRepository;
             _metrics = metrics;
         }
-        public async Task Handle(CreatePaymentCommand request, CancellationToken cancellationToken)
+        public async Task Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            var payment = new PaymentAggregate(request.OrderId, request.Amount, request.Currency);
+            var Order = new OrderAggregate(request.Customer, request.Products, request.Currency);
 
-            await _paymentRepository.StoreAsyc(payment);
-            _metrics.PaymentCreated();
+            await _OrderRepository.StoreAsyc(Order);
+            _metrics.OrderCreated();
         }
     }
 }

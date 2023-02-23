@@ -1,31 +1,30 @@
 ﻿using MassTransit;
 using Microsoft.Extensions.Caching.Distributed;
-using Payment.Contracts.Events;
-using Payment.Read.Application.DTO;
+using Order.Contracts.Orders.Events;
+using Order.Read.Application.DTO;
 using System.Text.Json;
 
-namespace Payment.Read.Handlers
+namespace Order.Read.Handlers
 {
-    public class PaymentCreatedHandler : IConsumer<PaymentCreated>
+    public class OrderCreatedHandler : IConsumer<OrderCreated>
     {
 
         private readonly IDistributedCache _cache;
 
-        public PaymentCreatedHandler(IDistributedCache cache)
+        public OrderCreatedHandler(IDistributedCache cache)
         {
             _cache = cache;
         }
 
-        public async Task Consume(ConsumeContext<PaymentCreated> context)
+        public async Task Consume(ConsumeContext<OrderCreated> context)
         {
-            var payment = new PaymentDTO
+            var Order = new OrderDTO
             {
                 Id = context.Message.AggregateId,
-                Amount = context.Message.Amount,
                 Currency = context.Message.Currency
             };
 
-            await _cache.SetStringAsync(context.Message.Id.ToString(), JsonSerializer.Serialize(payment));
+            await _cache.SetStringAsync(context.Message.Id.ToString(), JsonSerializer.Serialize(Order));
            
         }
     }

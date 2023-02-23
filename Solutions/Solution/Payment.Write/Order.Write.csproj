@@ -13,6 +13,7 @@
     <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
     <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.3.1" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.13" />
+    <PackageReference Include="MediatR" Version="12.0.0" />
     <PackageReference Include="OpenTelemetry.Exporter.Jaeger" Version="1.4.0-rc.4" />
     <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.3.2" />
     <PackageReference Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" Version="1.4.0-rc.4" />
@@ -23,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Payment.Write.Application\Payment.Write.Application.csproj" />
+    <ProjectReference Include="..\Payment.Write.Application\Order.Write.Application.csproj" />
   </ItemGroup>
 
 </Project>

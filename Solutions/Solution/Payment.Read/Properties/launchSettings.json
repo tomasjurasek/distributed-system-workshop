@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "Payment.Read": {
+    "Order.Read": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

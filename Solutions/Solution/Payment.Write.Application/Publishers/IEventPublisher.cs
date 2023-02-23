@@ -1,4 +1,4 @@
-﻿namespace Payment.Write.Application.Publishers
+﻿namespace Order.Write.Application.Publishers
 {
     public interface IEventPublisher
     {

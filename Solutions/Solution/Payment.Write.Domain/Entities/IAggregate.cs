@@ -1,6 +1,6 @@
-﻿using Payment.Contracts.Events;
+﻿using Order.Contracts.Events;
 
-namespace Payment.Write.Domain.Entities
+namespace Order.Write.Domain.Entities
 {
     public interface IAggregate
     {

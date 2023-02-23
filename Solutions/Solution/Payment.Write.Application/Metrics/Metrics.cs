@@ -1,14 +1,14 @@
 ﻿using System.Diagnostics.Metrics;
 
-namespace Payment.Write.Application.Metrics
+namespace Order.Write.Application.Metrics
 {
     public sealed class Metrics : IMetrics
     {
-        private static Counter<int> _paymentCreatedCounter = new Meter("Payment").CreateCounter<int>("payment-created", "Payment");
+        private static Counter<int> _OrderCreatedCounter = new Meter("Order").CreateCounter<int>("Order-created", "Order");
 
-        public void PaymentCreated()
+        public void OrderCreated()
         {
-            _paymentCreatedCounter.Add(1);
+            _OrderCreatedCounter.Add(1);
         }
     }
 }

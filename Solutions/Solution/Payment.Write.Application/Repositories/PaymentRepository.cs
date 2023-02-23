@@ -1,25 +1,25 @@
 ﻿using EventStore.Client;
 using Microsoft.Extensions.Options;
-using Payment.Contracts.Events;
-using Payment.Write.Application.Helpers;
-using Payment.Write.Application.Settings;
-using Payment.Write.Domain.Entities;
-using Payment.Write.Domain.Repositories;
+using Order.Contracts.Events;
+using Order.Write.Application.Helpers;
+using Order.Write.Application.Settings;
+using Order.Write.Domain.Entities;
+using Order.Write.Domain.Repositories;
 using System.Text;
 using System.Text.Json;
 
-namespace Payment.Write.Application
+namespace Order.Write.Application
 {
-    public class PaymentRepository : IPaymentRepository
+    public class OrderRepository : IOrderRepository
     {
         private readonly EventStoreClient _store;
 
-        public PaymentRepository(IOptions<EventStoreSettings> settings)
+        public OrderRepository(IOptions<EventStoreSettings> settings)
         {
             var eventStoreClientSettings = EventStoreClientSettings.Create(settings.Value.ConnectionString);
             _store = new EventStoreClient(eventStoreClientSettings);
         }
-        public async Task<PaymentAggregate> GetAsync(Guid id, CancellationToken cancellationToken = default)
+        public async Task<OrderAggregate> GetAsync(Guid id, CancellationToken cancellationToken = default)
         {
             var events = await _store
                 .ReadStreamAsync(
@@ -38,11 +38,11 @@ namespace Payment.Write.Application
                 throw new Exception();
             }
 
-            return new PaymentAggregate(parsedEvents!);
+            return new OrderAggregate(parsedEvents!);
 
         }
 
-        public async Task StoreAsyc(PaymentAggregate aggregate, CancellationToken cancellationToken = default)
+        public async Task StoreAsyc(OrderAggregate aggregate, CancellationToken cancellationToken = default)
         {
             var eventData = aggregate.UncommitedEvents
                 .Select(s =>  

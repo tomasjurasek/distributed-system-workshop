@@ -1,4 +1,4 @@
-﻿namespace Payment.Contracts.Events
+﻿namespace Order.Contracts.Events
 {
     public abstract record Event : IEvent
     {

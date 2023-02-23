@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using Payment.Read.Application.DTO;
+using Order.Read.Application.DTO;
 
-namespace Payment.Read.Application.Queries
+namespace Order.Read.Application.Queries
 {
-    public record GetPaymentQuery : IRequest<PaymentDTO>
+    public record GetOrderQuery : IRequest<OrderDTO>
     {
         public Guid Id { get; init; }
     }

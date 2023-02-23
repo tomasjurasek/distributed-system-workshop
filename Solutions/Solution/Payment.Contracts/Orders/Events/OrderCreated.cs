@@ -1,16 +1,17 @@
-﻿using Payment.Contracts.Events;
+﻿using Order.Contracts.Events;
 
-namespace Payment.Contracts.Orders.Events
+namespace Order.Contracts.Orders.Events
 {
     public record OrderCreated : Event
     {
-        public IReadOnlyCollection<ProductDTO> Products { get; init; } = new List<ProductDTO>();
-        public string Currency { get; init; }
-    }
+        public Customer Customer { get; init; }
 
-    public record ProductDTO
-    {
-        public string Ean { get; init; }
-        public decimal Price { get; init; }
+        public Address Address { get; init; }
+
+        public IReadOnlyCollection<Product> Products { get; init; } = new List<Product>();
+
+        public string Currency { get; init; }
+
+        public OrderStatus Status { get; init; }
     }
 }

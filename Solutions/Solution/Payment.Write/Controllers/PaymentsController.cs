@@ -1,21 +1,21 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Payment.Write.Application.Commands;
+using Order.Write.Application.Commands;
 using System.Diagnostics.Metrics;
 
-namespace Payment.Write.Controllers
+namespace Order.Write.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PaymentsController : ControllerBase
+    public class OrdersController : ControllerBase
     {
-        private static Counter<int>  counter = new Meter("Payment").CreateCounter<int>("payment-created", "Payment");
+        private static Counter<int>  counter = new Meter("Order").CreateCounter<int>("Order-created", "Order");
 
-        private readonly ILogger<PaymentsController> _logger;
+        private readonly ILogger<OrdersController> _logger;
         private readonly IMediator _mediator;
 
-        public PaymentsController(
-            ILogger<PaymentsController> logger,
+        public OrdersController(
+            ILogger<OrdersController> logger,
             IMediator mediator)
         {
             _logger = logger;
@@ -30,7 +30,7 @@ namespace Payment.Write.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreatePaymentCommand command)
+        public async Task<IActionResult> Create(CreateOrderCommand command)
         {
             await _mediator.Send(command);
             return Ok();

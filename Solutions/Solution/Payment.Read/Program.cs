@@ -1,6 +1,6 @@
 using MassTransit;
 using Microsoft.Extensions.Caching.Distributed;
-using Payment.Read.Handlers;
+using Order.Read.Handlers;
 using RabbitMQ.Client;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,11 +22,11 @@ builder.Services.AddMassTransit(mt =>
             h.Password("guest");
         });
 
-        cfg.ReceiveEndpoint("payment-created-read", re =>
+        cfg.ReceiveEndpoint("order-created-read", re =>
         {
             re.ConfigureConsumeTopology = false;
-            re.Consumer(() => new PaymentCreatedHandler(context.GetService<IDistributedCache>()));
-            re.Bind("payment-created", e =>
+            re.Consumer(() => new OrderCreatedHandler(context.GetService<IDistributedCache>()));
+            re.Bind("order-created", e =>
             {
                 e.RoutingKey = "*";
                 e.ExchangeType = ExchangeType.Topic;

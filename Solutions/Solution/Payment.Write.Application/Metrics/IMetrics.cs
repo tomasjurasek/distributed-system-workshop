@@ -1,7 +1,7 @@
-﻿namespace Payment.Write.Application.Metrics
+﻿namespace Order.Write.Application.Metrics
 {
     public interface IMetrics
     {
-        void PaymentCreated();
+        void OrderCreated();
     }
 }

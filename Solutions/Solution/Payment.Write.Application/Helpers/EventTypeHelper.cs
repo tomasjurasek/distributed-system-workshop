@@ -1,12 +1,12 @@
-﻿using Payment.Contracts.Events;
+﻿using Order.Contracts.Orders.Events;
 
-namespace Payment.Write.Application.Helpers
+namespace Order.Write.Application.Helpers
 {
     public static class EventTypeHelper
     {
         public static Type GetType(string type) => type switch
         {
-            nameof(PaymentCreated) => typeof(PaymentCreated)
+            nameof(OrderCreated) => typeof(OrderCreated)
         };
     }
 }

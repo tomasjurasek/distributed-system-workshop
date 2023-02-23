@@ -3,23 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.Write", "Payment.Write\Payment.Write.csproj", "{566903DC-8FCF-4496-8BBF-D04B54753171}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Write", "Payment.Write\Order.Write.csproj", "{566903DC-8FCF-4496-8BBF-D04B54753171}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payment.Write.Solution", "Payment.Write.Solution", "{0EBDBF32-B4A0-4257-83A8-3565F6AF49AE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order.Write.Solution", "Order.Write.Solution", "{0EBDBF32-B4A0-4257-83A8-3565F6AF49AE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payment.Read.Solution", "Payment.Read.Solution", "{01A7D907-5C0F-4607-906E-DC022866E491}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order.Read.Solution", "Order.Read.Solution", "{01A7D907-5C0F-4607-906E-DC022866E491}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.Write.Application", "Payment.Write.Application\Payment.Write.Application.csproj", "{775F95D3-690A-43C1-81BB-9CDC8D681367}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Write.Application", "Payment.Write.Application\Order.Write.Application.csproj", "{775F95D3-690A-43C1-81BB-9CDC8D681367}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.Write.Domain", "Payment.Write.Domain\Payment.Write.Domain.csproj", "{DAA20992-6B97-450A-9105-8F87E47F4802}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Write.Domain", "Payment.Write.Domain\Order.Write.Domain.csproj", "{DAA20992-6B97-450A-9105-8F87E47F4802}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.Read", "Payment.Read\Payment.Read.csproj", "{6550E2EE-BCF8-420C-834C-87F77738DECC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Read", "Payment.Read\Order.Read.csproj", "{6550E2EE-BCF8-420C-834C-87F77738DECC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.Read.Application", "Payment.Read.Application\Payment.Read.Application.csproj", "{C73FA098-7250-4DD3-BD01-BDB9F7E16C0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Read.Application", "Payment.Read.Application\Order.Read.Application.csproj", "{C73FA098-7250-4DD3-BD01-BDB9F7E16C0F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Payment.Contracts.Solution", "Payment.Contracts.Solution", "{D9737366-C9B2-4056-85AF-4F439275F023}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order.Contracts.Solution", "Order.Contracts.Solution", "{D9737366-C9B2-4056-85AF-4F439275F023}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.Contracts", "Payment.Contracts\Payment.Contracts.csproj", "{E599408E-44DB-4A6D-8036-D4B0F1994CBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Contracts", "Payment.Contracts\Order.Contracts.csproj", "{E599408E-44DB-4A6D-8036-D4B0F1994CBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

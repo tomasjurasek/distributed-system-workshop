@@ -1,24 +1,24 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Caching.Distributed;
-using Payment.Read.Application.DTO;
+using Order.Read.Application.DTO;
 using System.Text.Json;
 
-namespace Payment.Read.Application.Queries
+namespace Order.Read.Application.Queries
 {
-    public class GetPaymentQueryHandler : IRequestHandler<GetPaymentQuery, PaymentDTO>
+    public class GetOrderQueryHandler : IRequestHandler<GetOrderQuery, OrderDTO>
     {
         private readonly IDistributedCache _cache;
 
-        public GetPaymentQueryHandler(IDistributedCache cache)
+        public GetOrderQueryHandler(IDistributedCache cache)
         {
             _cache = cache;
         }
 
-        public async Task<PaymentDTO> Handle(GetPaymentQuery request, CancellationToken cancellationToken)
+        public async Task<OrderDTO> Handle(GetOrderQuery request, CancellationToken cancellationToken)
         {
             var jsonData = await _cache.GetAsync(request.Id.ToString());
 
-            return JsonSerializer.Deserialize<PaymentDTO>(jsonData);
+            return JsonSerializer.Deserialize<OrderDTO>(jsonData);
         }
     }
 }

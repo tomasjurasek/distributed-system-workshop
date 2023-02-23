@@ -2,14 +2,15 @@ using MassTransit;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
-using Payment.Contracts.Events;
-using Payment.Write.Application;
-using Payment.Write.Application.Commands;
-using Payment.Write.Application.Metrics;
-using Payment.Write.Application.Publishers;
-using Payment.Write.Application.Settings;
-using Payment.Write.Domain.Repositories;
-using Payment.Write.HostedService;
+using Order.Contracts.Events;
+using Order.Contracts.Orders.Events;
+using Order.Write.Application;
+using Order.Write.Application.Commands;
+using Order.Write.Application.Metrics;
+using Order.Write.Application.Publishers;
+using Order.Write.Application.Settings;
+using Order.Write.Domain.Repositories;
+using Order.Write.HostedService;
 using RabbitMQ.Client;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,19 +38,19 @@ builder.Services.AddOpenTelemetry()
     })
     .WithMetrics(s => 
     {
-        s.AddMeter("Payment")
+        s.AddMeter("Order")
         .AddPrometheusExporter();
     });
 
 builder.Services.Configure<EventStoreSettings>(builder.Configuration.GetSection("EventStore"));
 
-builder.Services.AddSingleton<IPaymentRepository, PaymentRepository>();
+builder.Services.AddSingleton<IOrderRepository, OrderRepository>();
 builder.Services.AddSingleton<IMetrics, Metrics>();
 builder.Services.AddScoped<IEventPublisher, EventPublisher>();
 builder.Services.AddHostedService<EventPublisherHostedService>();
 
 builder.Services.AddMediatR(cfg => {
-    cfg.RegisterServicesFromAssembly(typeof(CreatePaymentCommand).Assembly);
+    cfg.RegisterServicesFromAssembly(typeof(CreateOrderCommand).Assembly);
 });
 
 builder.Services.AddMassTransit(mt =>
@@ -62,8 +63,8 @@ builder.Services.AddMassTransit(mt =>
             h.Password("guest");
         });
 
-        cfg.Message<PaymentCreated>(e => e.SetEntityName("payment-created"));
-        cfg.Publish<PaymentCreated>(e => e.ExchangeType = ExchangeType.Topic);
+        cfg.Message<OrderCreated>(e => e.SetEntityName("order-created"));
+        cfg.Publish<OrderCreated>(e => e.ExchangeType = ExchangeType.Topic);
         
     });
 });

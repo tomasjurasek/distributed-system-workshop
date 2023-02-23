@@ -1,16 +1,16 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Payment.Read.Application.Queries;
+using Order.Read.Application.Queries;
 
-namespace Payment.Read.Controllers
+namespace Order.Read.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PaymentController : ControllerBase
+    public class OrderController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public PaymentController(IMediator mediator)
+        public OrderController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -18,14 +18,14 @@ namespace Payment.Read.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var payment = await _mediator.Send(new GetPaymentQuery { Id = id });
+            var Order = await _mediator.Send(new GetOrderQuery { Id = id });
 
-            if(payment is null)
+            if(Order is null)
             {
                 return NoContent();
             }
 
-            return Ok(payment);
+            return Ok(Order);
         }
     }
 }

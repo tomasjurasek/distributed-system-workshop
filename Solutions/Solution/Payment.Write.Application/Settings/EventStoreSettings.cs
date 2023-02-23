@@ -1,4 +1,4 @@
-﻿namespace Payment.Write.Application.Settings
+﻿namespace Order.Write.Application.Settings
 {
     public record EventStoreSettings
     {
