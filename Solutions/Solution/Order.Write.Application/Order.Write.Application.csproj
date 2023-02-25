@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EventStore.Client.Grpc" Version="22.0.0" />
+    <PackageReference Include="EventStore.Client.Grpc.Streams" Version="22.0.0" />
+    <PackageReference Include="MassTransit" Version="8.0.13" />
+    <PackageReference Include="MediatR" Version="12.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Order.Contracts\Order.Contracts.csproj" />
+    <ProjectReference Include="..\Order.Write.Domain\Order.Write.Domain.csproj" />
+    <ProjectReference Include="..\Payment.Write.Domain\Order.Write.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
