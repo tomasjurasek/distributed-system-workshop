@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Write.Domain", "Order
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order.Write.ProcessManager.Solution", "Order.Write.ProcessManager.Solution", "{330629D9-20E6-4C34-9706-4C6CFE307B07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Write.ProcessManager", "Order.Write.ProcessManager\Order.Write.ProcessManager.csproj", "{C75173C2-D20B-44F3-B1C2-211757722565}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Write.ProcessManager", "Order.Write.ProcessManager\Order.Write.ProcessManager.csproj", "{C75173C2-D20B-44F3-B1C2-211757722565}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

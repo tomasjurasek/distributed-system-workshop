@@ -17,7 +17,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Order.Contracts\Order.Contracts.csproj" />
     <ProjectReference Include="..\Order.Write.Domain\Order.Write.Domain.csproj" />
-    <ProjectReference Include="..\Payment.Write.Domain\Order.Write.Domain.csproj" />
   </ItemGroup>
 
 </Project>
